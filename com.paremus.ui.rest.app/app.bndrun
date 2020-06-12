@@ -1,0 +1,86 @@
+# app.bndrun
+-standalone: ../_index/target/index.xml
+
+-resolve.effective: active
+
+-runfw: org.apache.felix.framework
+-runee: JavaSE-11
+
+-runvm: -ea,\
+ -Dorg.slf4j.simpleLogger.defaultLogLevel=debug,\
+ -Dlogback.configurationFile=${.}/src/main/resources/logback.xml,\
+ -Djava.util.logging.config.file=${.}/src/main/resources/logging.properties,\
+ -Dorg.apache.felix.http.requestlog.file.path=./request.log,\
+ -Dorg.osgi.service.http.port=-1,\
+ -Dcom.paremus.ui.http.port=8080,\
+ -Dcom.paremus.ui.client.dir=${.}/../../js_client/build-dev
+
+#-dev
+
+#-runtrace: true
+
+-runprovidedcapabilities: ${native_capability}
+
+-runsystempackages: sun.reflect
+
+-runrequires: \
+    bnd.identity;id='com.paremus.ui.rest.app',\
+    bnd.identity;id='com.paremus.ui.rest.config',\
+    bnd.identity;id='com.paremus.ui.metaconfig',\
+    bnd.identity;id='com.paremus.ui.rest.fake',\
+    bnd.identity;id='com.paremus.ui.client'
+
+debug:\
+    org.apache.felix.webconsole;version='[4.3.12.all,4.3.12.all]',\
+    org.apache.felix.webconsole.plugins.ds;version='[2.1.0,2.1.1]',\
+    org.apache.felix.gogo.command;version='[1.0.2,1.0.3)',\
+    org.apache.felix.gogo.runtime;version='[1.0.10,1.0.11)',\
+    org.apache.felix.gogo.jline;version='[1.0.10,1.0.11)',\
+    org.jline;version='[3.5.1,3.5.2)'
+
+# after resolve add ${debug} if required
+-runbundles: \
+	ch.qos.logback.classic;version='[1.2.3,1.2.4)',\
+	ch.qos.logback.core;version='[1.2.3,1.2.4)',\
+	com.fasterxml.jackson.core.jackson-annotations;version='[2.9.0,2.9.1)',\
+	com.fasterxml.jackson.core.jackson-core;version='[2.9.8,2.9.9)',\
+	com.fasterxml.jackson.core.jackson-databind;version='[2.9.8,2.9.9)',\
+	com.fasterxml.jackson.jaxrs.jackson-jaxrs-base;version='[2.9.8,2.9.9)',\
+	com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider;version='[2.9.8,2.9.9)',\
+	com.fasterxml.jackson.module.jackson-module-jaxb-annotations;version='[2.9.8,2.9.9)',\
+	com.github.oshi.oshi-core;version='[4.2.1,4.2.2)',\
+	com.paremus.ui.client;version='[1.0.0,1.0.1)',\
+	com.paremus.ui.metaconfig;version='[1.0.0,1.0.1)',\
+	com.paremus.ui.rest;version='[1.0.0,1.0.1)',\
+	com.paremus.ui.rest.app;version='[1.0.0,1.0.1)',\
+	com.paremus.ui.rest.config;version='[1.0.0,1.0.1)',\
+	com.paremus.ui.rest.fake;version='[1.0.0,1.0.1)',\
+	com.sun.jna;version='[5.5.0,5.5.1)',\
+	com.sun.jna.platform;version='[5.5.0,5.5.1)',\
+	jaxb-api;version='[2.2.11,2.2.12)',\
+	org.apache.aries.javax.jax.rs-api;version='[1.0.4,1.0.5)',\
+	org.apache.aries.jax.rs.jackson;version='[1.0.1,1.0.2)',\
+	org.apache.aries.jax.rs.shiro.authz;version='[1.0.2,1.0.3)',\
+	org.apache.aries.jax.rs.whiteboard;version='[1.0.4,1.0.5)',\
+	org.apache.commons.commons-configuration2;version='[2.5.0,2.5.1)',\
+	org.apache.commons.commons-text;version='[1.6.0,1.6.1)',\
+	org.apache.commons.lang3;version='[3.9.0,3.9.1)',\
+	org.apache.commons.logging;version='[1.2.0,1.2.1)',\
+	org.apache.felix.configadmin;version='[1.9.16,1.9.17)',\
+	org.apache.felix.converter;version='[1.0.8,1.0.9)',\
+	org.apache.felix.http.jetty;version='[4.0.8,4.0.9)',\
+	org.apache.felix.http.servlet-api;version='[1.1.2,1.1.3)',\
+	org.apache.felix.metatype;version='[1.2.2,1.2.3)',\
+	org.apache.felix.scr;version='[2.1.16,2.1.17)',\
+	org.apache.geronimo.specs.geronimo-activation_1.1_spec;version='[1.1.0,1.1.1)',\
+	org.apache.servicemix.specs.annotation-api-1.3;version='[1.3.0,1.3.1)',\
+	org.apache.servicemix.specs.jaxws-api-2.2;version='[2.9.0,2.9.1)',\
+	org.apache.servicemix.specs.saaj-api-1.3;version='[2.9.0,2.9.1)',\
+	org.apache.shiro.core;version='[1.4.0,1.4.1)',\
+	org.apache.shiro.web;version='[1.4.0,1.4.1)',\
+	org.osgi.service.jaxrs;version='[1.0.0,1.0.1)',\
+	org.osgi.service.log;version='[1.4.0,1.4.1)',\
+	org.osgi.util.function;version='[1.1.0,1.1.1)',\
+	org.osgi.util.promise;version='[1.1.0,1.1.1)',\
+	org.osgi.util.pushstream;version='[1.0.0,1.0.1)',\
+	slf4j.api;version='[1.7.25,1.7.26)'
